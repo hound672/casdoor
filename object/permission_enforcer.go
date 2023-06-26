@@ -341,7 +341,7 @@ m = g(r.sub, p.sub) && r.obj == p.obj && r.act == p.act`
 		policyDefinition = append(policyDefinition, "permissionId")
 
 		m, _ := model.NewModelFromString(modelText)
-		m.AddDef("p", "p", strings.Join(policyDefinition, ","))
+		//m.AddDef("p", "p", strings.Join(policyDefinition, ","))
 
 		return m, err
 	}
