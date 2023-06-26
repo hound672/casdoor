@@ -183,8 +183,7 @@ func (c *ApiController) BatchEnforce() {
 			return
 		}
 
-		//enforceResult, err := object.BatchEnforce(firstPermission, &requests, permissionIds...)
-		enforceResult, err := object.BatchEnforce(firstPermission, &requests)
+		enforceResult, err := object.BatchEnforce(firstPermission, &requests, permissionIds...)
 		if err != nil {
 			c.ResponseError(err.Error())
 			return
