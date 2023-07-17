@@ -1,0 +1,32 @@
+version: '3.1'
+services:
+  casdoor:
+    restart: always
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: STANDARD
+        #entrypoint: /bin/sh -c './server --createDatabase=true'
+    entrypoint: /bin/sh -c './server'
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      RUNNING_IN_DOCKER: "true"
+      driverName: "postgres"
+      dataSourceName: "user=root password=123456 host=db port=5432 sslmode=disable dbname=casdoor"
+    volumes:
+      - ./conf:/conf/
+
+  db:
+    image: postgres:13
+    container_name: casdoor_psql
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: casdoor
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 123456
+    volumes:
+      - /usr/local/docker/mysql:/var/lib/casdoor_psql
